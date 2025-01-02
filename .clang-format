@@ -1,0 +1,15 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: true
+AlwaysBreakTemplateDeclarations: Yes
+AllowShortFunctionsOnASingleLine: None
+BreakBeforeBraces: Allman
+ReflowComments: true
+PenaltyBreakComment: 1000000000
+ColumnLimit: 90
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
