@@ -6,7 +6,7 @@ AllowShortBlocksOnASingleLine: Never
 AllowShortCaseLabelsOnASingleLine: true
 AlwaysBreakTemplateDeclarations: Yes
 AllowShortFunctionsOnASingleLine: None
-BreakBeforeBraces: Allman
+BreakBeforeBraces: Attach
 ReflowComments: true
 PenaltyBreakComment: 1000000000
 ColumnLimit: 90
