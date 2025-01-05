@@ -51,7 +51,7 @@ target_link_libraries(imgui PUBLIC
     OpenGL::GL
 )
 
-add_executable(${CMAKE_PROJECT_NAME} main.cpp)
+add_executable(${CMAKE_PROJECT_NAME} gui.cpp)
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR})
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE STB_IMAGE_IMPLEMENTATION)
