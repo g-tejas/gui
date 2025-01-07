@@ -1,18 +1,14 @@
 #pragma once
 
-#include "stb_image.h"
 #include <cassert>
-#include <chrono>
-#include <fstream>
+#include <csignal>
 #include <iostream>
-#include <signal.h>
+#include <string>
 #include <sys/ioctl.h>
 #include <sys/select.h>
 #include <sys/time.h>
 #include <termios.h>
-#include <thread>
 #include <unistd.h>
-#include <vector>
 #include <zlib.h>
 
 /*
@@ -116,7 +112,7 @@ auto kitty_send_command(const std::string &cmd_str, const uint8_t *payload_data 
 
     // Prepare base64 data
     size_t base64_size = ((payload_size + 2) / 3) * 4;
-    uint8_t *base64_data = (uint8_t *)malloc(base64_size + 1);
+    auto base64_data = (uint8_t *)malloc(base64_size + 1);
     if (!base64_data) {
         std::cerr << "Failed to allocate memory for base64 encoding\n";
         return 0;
@@ -132,6 +128,7 @@ auto kitty_send_command(const std::string &cmd_str, const uint8_t *payload_data 
 
     // Send data in chunks
     size_t sent_bytes = 0;
+    std::size_t chunks = 0;
     while (sent_bytes < base64_size) {
         size_t chunk_size = std::min(chunk_limit, base64_size - sent_bytes);
         bool is_last_chunk = (sent_bytes + chunk_size >= base64_size);
@@ -148,6 +145,8 @@ auto kitty_send_command(const std::string &cmd_str, const uint8_t *payload_data 
         std::cout.write((char *)base64_data + sent_bytes, chunk_size);
         std::cout << ESC << "\\";
         std::cout.flush();
+
+        chunks++;
 
         sent_bytes += chunk_size;
     }
